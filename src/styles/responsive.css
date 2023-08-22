@@ -1,0 +1,13 @@
+/* Default styles for mobile */
+.brand-logo {
+    text-align: center;
+  }
+  
+  /* Media query for larger screens */
+  @media (min-width: 768px) {
+    .brand-logo {
+      text-align: left;
+    }
+  
+    /* Adjust other styles as needed */
+  }
