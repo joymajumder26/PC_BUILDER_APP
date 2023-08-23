@@ -1,10 +1,11 @@
 import { Col, Row } from "antd";
-import {
-  UserOutlined,
-  CalendarOutlined,
-  CommentOutlined,
-  ProfileOutlined,
-} from "@ant-design/icons";
+// import {
+//   UserOutlined,
+//   CalendarOutlined,
+//   CommentOutlined,
+//   ProfileOutlined,
+//   StarFilled,
+// } from "@ant-design/icons";
 import Image from "next/image";
 import RootLayout from "@/components/Layouts/RootLayout";
 
@@ -20,7 +21,7 @@ const PcDetailPage = ({ pc }) => (
       />
     </Col>
     <Col md={6} lg={12} style={{ paddingLeft: "20px" }}>
-      <h1 style={{ fontSize: "30px" }}>{news?.title}</h1>
+      <h1 style={{ fontSize: "30px" }}>{pc?.title}</h1>
       <span
         style={{
           color: "gray",
@@ -28,7 +29,7 @@ const PcDetailPage = ({ pc }) => (
           fontSize: "20px",
         }}
       >
-        <UserOutlined /> {pc?.author}
+        Category: {pc?.category}
       </span>
       <div
         className="line"
@@ -40,10 +41,10 @@ const PcDetailPage = ({ pc }) => (
         }}
       ></div>
 
-      <p
+      {/* <p
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
           width: "100%",
           color: "gray",
           margin: "10px 0px",
@@ -51,19 +52,79 @@ const PcDetailPage = ({ pc }) => (
         }}
       >
         <span>
-          <CalendarOutlined /> {pc?.release_date}
+          <ProfileOutlined /> {pc?.status}
         </span>
         <span>
-          <CommentOutlined /> {pc?.comment_count} Comments
+          <StarFilled /> {pc?.rating}
         </span>
-        <span>
-          <ProfileOutlined /> {pc?.category}
-        </span>
-      </p>
+      </p> */}
+      <span
+        style={{
+          color: "gray",
+          display: "block",
+          fontSize: "20px",
+        }}
+      >
+        Status: {pc?.status}
+      </span>
+      <span
+        style={{
+          color: "gray",
+          display: "block",
+          fontSize: "20px",
+        }}
+      >
+        Price: {pc?.price}
+      </span>
+      <span
+        style={{
+          color: "gray",
+          display: "block",
+          fontSize: "20px",
+        }}
+      >
+        Description: {pc?.description}
+      </span>
+      <span
+        style={{
+          color: "gray",
+          display: "block",
+          fontSize: "20px",
+        }}
+      >
+        Key Features: {pc?.keyFeature}
+      </span>
+      <span
+        style={{
+          color: "gray",
+          display: "block",
+          fontSize: "20px",
+        }}
+      >
+        Individual Rating: {pc?.individualRating}
+      </span>
+      <span
+        style={{
+          color: "gray",
+          display: "block",
+          fontSize: "20px",
+        }}
+      >
+       Average Rating : {pc?.averageRating}
+      </span>
+      <span
+        style={{
+          color: "gray",
+          display: "block",
+          fontSize: "20px",
+        }}
+      >
+        Reviews: {pc?.reviews}
+      </span>
 
-      <p style={{ fontSize: "25px", fontWeight: "lighter" }}>
+      {/* <p style={{ fontSize: "25px", fontWeight: "lighter" }}>
         {pc?.description}
-      </p>
+      </p> */}
     </Col>
   </Row>
 );
@@ -76,9 +137,9 @@ PcDetailPage.getLayout = function getLayout(page) {
 export const getStaticPaths = async () => {
   const res = await fetch("http://localhost:3000/api/pc");
   const pces = await res.json();
-    console.log("-----------------------------------------",pces);
+  const pcs = pces.data;
 
-  const paths = pces.map((pc) => ({
+  const paths = pcs.map((pc) => ({
     params: { pcId: pc.id },
   }));
 
@@ -87,13 +148,17 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const { params } = context;
-  const res = await fetch(`http://localhost:3000/api/pc/${params.pcId}`);
+  //   http://localhost:3000/api/pc?pcId=3
+  const res = await fetch(`http://localhost:3000/api/pc/?pcId=${params.pcId}`);
   const data = await res.json();
-  // console.log(data);
+  // console.log(
+  //   "---------------------------------------------------------------------",
+  //   data
+  // );
 
   return {
     props: {
-      pc: data,
+      pc: data?.data,
     },
   };
 };

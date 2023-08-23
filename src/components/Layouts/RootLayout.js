@@ -14,10 +14,30 @@ const { Header, Content, Footer } = Layout;
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import styles from "@/styles/responsive.css";
 
-const RootLayout = ({ children }) => {
+const RootLayout = ({ children,session }) => {
+  // const [scrolling, setScrolling] = useState(false);
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.scrollY > 0) {
+  //       setScrolling(true);
+  //     } else {
+  //       setScrolling(false);
+  //     }
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
+
+
   // const [collapsed, setCollapsed] = useState(true);
 
   // const toggleMenu = () => {
@@ -56,6 +76,12 @@ const RootLayout = ({ children }) => {
         style={{
           display: "flex",
           justifyContent: "space-between",
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          width: '100%',
+          alignItems: 'center',
+          // backgroundColor: scrolling ? "white" : "black", // Change header color when scrolling
         }}
       >
         <div className="brand-logo">
@@ -98,7 +124,7 @@ const RootLayout = ({ children }) => {
               <items>Pc Builder</items>
             </Button>
           </Link>
-          {/* {session?.user ? (
+          {session?.user ? (
           <items>
             <Button onClick={() => signOut()} type="primary" danger>
               Logout
@@ -111,7 +137,7 @@ const RootLayout = ({ children }) => {
           >
             <items>Login</items>
           </Link>
-        )} */}
+        )}
         </Menu>
       </Header>
 

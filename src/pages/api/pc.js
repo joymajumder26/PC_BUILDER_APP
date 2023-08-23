@@ -1,6 +1,5 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = "mongodb+srv://pc-builder-app:admin1234@cluster0.0qdtr89.mongodb.net/pc-builder-app?retryWrites=true&w=majority";
-
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -17,10 +16,27 @@ async function run(req, res) {
     // Send a ping to confirm a successful connection
     const newsCollection = client.db("pc-builder-app").collection("pc");
 
+    // if (req.method === "GET") {
+    //   const pc = await newsCollection.find({}).toArray();
+    //   res.send({ message: "success", status: 200, data: pc });
+    // }
+
     if (req.method === "GET") {
-      const pc = await newsCollection.find({}).toArray();
-      res.send({ message: "success", status: 200, data: pc });
-    }
+        if (req.query.pcId) {
+            console.log('req.query.pcId',req.query.pcId);
+          const pcId = req.query.pcId;
+          const pc = await newsCollection.findOne({ id:pcId });
+  
+          if (!pc) {
+            res.status(404).json({ message: "PC not found", status: 404 });
+          } else {
+            res.status(200).json({ message: "success", status: 200, data: pc });
+          }
+        } else {
+          const pcs = await newsCollection.find({}).toArray();
+          res.status(200).json({ message: "success", status: 200, data: pcs });
+        }
+      }
 
     if (req.method === "POST") {
       const pc = req.body;

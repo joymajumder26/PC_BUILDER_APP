@@ -1,10 +1,11 @@
-import { Card, Col, Row } from "antd";
+import { Button, Card, Col, Row } from "antd";
 import Image from "next/image";
 import {
   ArrowRightOutlined,
   CalendarOutlined,
   CommentOutlined,
   ProfileOutlined,
+  StarFilled
 } from "@ant-design/icons";
 import Link from "next/link";
 
@@ -53,35 +54,50 @@ const AllPc = ({ allPc }) => {
                   width: "100%",
                 }}
               ></div>
+              {/* <h1>category={pc?.category}</h1> */}
+              <p style={{
+                  display: "flex",
+                  width: "100%",
+                  color: "gray",
+                  margin: "10px 0px",
+                  fontSize: "12px",
+                  
+                  
+                }}>Category: <Meta style={{paddingLeft:"7px"}} title={pc?.category} /></p>
+              <p style={{
+                  display: "flex",
+                  width: "100%",
+                  color: "gray",
+                  margin: "10px 0px",
+                  fontSize: "12px",
+                  
+                  
+                }}>Price: <Meta style={{paddingLeft:"7px"}} title={pc?.price} /></p>
+              
 
               <p
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "space-around",
                   width: "100%",
                   color: "gray",
                   margin: "10px 0px",
                   fontSize: "12px",
                 }}
               >
+              
+                
                 <span>
-                  <CalendarOutlined /> {pc?.release_date}
+                  <ProfileOutlined /> {pc?.status}
                 </span>
                 <span>
-                  <CommentOutlined /> {pc?.comment_count} COMMENTS
-                </span>
-                <span>
-                  <ProfileOutlined /> {pc?.category}
+                <StarFilled /> {pc?.rating}
                 </span>
               </p>
 
-              <p style={{ fontSize: "15px" }}>
-                {pc?.description.length > 100
-                  ? pc?.description.slice(0, 70) + "..."
-                  : pc?.description}
-              </p>
+              
               <Link href={`/pc/${pc?.id}`}>
-                <p
+                <Button
                   style={{
                     fontSize: "15px",
                     marginTop: "20px",
@@ -94,8 +110,10 @@ const AllPc = ({ allPc }) => {
                     textAlign: "center",
                   }}
                 >
-                  Keep Reading <ArrowRightOutlined />
-                </p>
+                  <p>
+                    Keep Reading <ArrowRightOutlined />
+                  </p>
+                </Button>
               </Link>
             </Card>
           </Col>
