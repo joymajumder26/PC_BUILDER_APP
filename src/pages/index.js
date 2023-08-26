@@ -2,6 +2,7 @@ import Head from "next/head";
 import RootLayout from "@/components/Layouts/RootLayout";
 import Banner from "@/components/UI/Banner";
 import AllPc from "@/components/UI/AllPc";
+import { Breadcrumb } from "antd";
 
 
 const HomePage = ({allPc}) => {
@@ -20,6 +21,15 @@ const HomePage = ({allPc}) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Breadcrumb
+      style={{
+        margin: '16px 0',
+      }}
+    >
+      <Breadcrumb.Item>/ Home</Breadcrumb.Item>
+      {/* <Breadcrumb.Item>List</Breadcrumb.Item>
+      <Breadcrumb.Item>App</Breadcrumb.Item> */}
+    </Breadcrumb>
       <Banner />
       <AllPc allPc={allPc}></AllPc>
     </>

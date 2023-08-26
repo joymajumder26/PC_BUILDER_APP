@@ -9,7 +9,7 @@ import {
   MenuOutlined,
   DownOutlined
 } from "@ant-design/icons";
-import { Button, Dropdown, Layout, Menu } from "antd";
+import { Breadcrumb, Button, Dropdown, Layout, Menu } from "antd";
 const { Header, Content, Footer } = Layout;
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
@@ -17,32 +17,10 @@ import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 // import styles from "@/styles/responsive.css";
 
-const RootLayout = ({ children,session }) => {
-  // const [scrolling, setScrolling] = useState(false);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (window.scrollY > 0) {
-  //       setScrolling(true);
-  //     } else {
-  //       setScrolling(false);
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-
-
-
-  // const [collapsed, setCollapsed] = useState(true);
-
-  // const toggleMenu = () => {
-  //   setCollapsed(!collapsed);
-  // };
+const RootLayout = ({ children }) => {
+  // const { data: session } = useSession();
+  // console.log("From Header",session);
+  
   const menu = (
     <Menu>
       <Menu.Item key="1">
@@ -81,7 +59,8 @@ const RootLayout = ({ children,session }) => {
           zIndex: 1,
           width: '100%',
           alignItems: 'center',
-          // backgroundColor: scrolling ? "white" : "black", // Change header color when scrolling
+          backgroundColor:"Dark",
+          // backgroundColor: scrolling ? "Dark" : "DarkGrey",
         }}
       >
         <div className="brand-logo">
@@ -99,7 +78,7 @@ const RootLayout = ({ children,session }) => {
             </Link>
           </h1>
         </div>
-        <Menu theme="dark" mode="vertical" className={styles.menu_items}>
+        <Menu theme="DarkGrey" mode="vertical" className={styles.menu_items}>
           <Dropdown overlay={menu}>
             <Link href="/categories">
               <span>
@@ -124,7 +103,7 @@ const RootLayout = ({ children,session }) => {
               <items>Pc Builder</items>
             </Button>
           </Link>
-          {session?.user ? (
+          {/* {session?.user ? (
           <items>
             <Button onClick={() => signOut()} type="primary" danger>
               Logout
@@ -137,23 +116,24 @@ const RootLayout = ({ children,session }) => {
           >
             <items>Login</items>
           </Link>
-        )}
+        )} */}
         </Menu>
       </Header>
-
+      
       <Content
         style={{
           padding: "0 24px",
           minHeight: "100vh",
         }}
-      >
+      >   
         {children}
       </Content>
+     
 
       <Footer
         style={{
           textAlign: "center",
-          backgroundColor: "green",
+          backgroundColor: "DarkGrey",
         }}
       >
         <div>
@@ -213,65 +193,7 @@ const RootLayout = ({ children,session }) => {
         </div>
       </Footer>
     </Layout>
-    // <Layout>
-    //   <Header
-    //   className={styles.header}
-    //     style={{
-    //       display: "flex",
-    //       justifyContent: "space-between",
-    //     }}
-    //   >
-    //     {/* Logo */}
-    //     <div className="brand-logo">
-    //       <h1>
-    //         <Link
-    //           href="/"
-    //           style={{
-    //             color: "white",
-    //             backgroundColor: "#404040",
-    //             padding: "5px 10px",
-    //             borderRadius: "3px",
-    //           }}
-    //         >
-    //           PC_BUILDER_APP
-    //         </Link>
-    //       </h1>
-    //     </div>
-    //     {/* Mobile Menu Button */}
-    //     <Button icon={<MenuOutlined />} onClick={toggleMenu} />
-
-    //     {/* Menu Items */}
-    //     <Menu theme="dark" mode={collapsed ? "vertical" : "horizontal"}>
-    //       {/* Links */}
-    //       <Link href="/allNews">
-    //         <items>
-    //           <ProfileOutlined />
-    //           All News
-    //         </items>
-    //       </Link>
-    //       <Link href="/about">
-    //         <items
-    //           style={{
-    //             margin: "0px 25px",
-    //           }}
-    //         >
-    //           <UserOutlined />
-    //           About Us
-    //         </items>
-    //       </Link>
-
-    //       <Link href="/pcBuilder">
-    //         <Button>
-    //           <items>Pc Builder</items>
-    //         </Button>
-    //       </Link>
-    //     </Menu>
-    //   </Header>
-
-    //   {/* Content */}
-    //   {/* {children} */}
-    //   {/* Footer */}
-    // </Layout>
+ 
   );
 };
 export default RootLayout;

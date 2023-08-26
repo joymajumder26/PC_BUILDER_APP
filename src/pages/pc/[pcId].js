@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Breadcrumb, Col, Row } from "antd";
 // import {
 //   UserOutlined,
 //   CalendarOutlined,
@@ -10,6 +10,16 @@ import Image from "next/image";
 import RootLayout from "@/components/Layouts/RootLayout";
 
 const PcDetailPage = ({ pc }) => (
+  <>
+      <Breadcrumb
+      style={{
+        margin: '16px 0',
+      }}
+    >
+      <Breadcrumb.Item>/ Home</Breadcrumb.Item>
+      <Breadcrumb.Item>PC</Breadcrumb.Item>
+      <Breadcrumb.Item>{pc?.id}</Breadcrumb.Item>
+    </Breadcrumb>
   <Row style={{ marginTop: "80px", alignItems: "center" }}>
     <Col md={6} lg={12}>
       <Image
@@ -127,6 +137,7 @@ const PcDetailPage = ({ pc }) => (
       </p> */}
     </Col>
   </Row>
+  </>
 );
 export default PcDetailPage;
 

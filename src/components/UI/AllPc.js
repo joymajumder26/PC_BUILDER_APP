@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 
 const AllPc = ({ allPc }) => {
+  // console.log("__________________++++++++++++++++++++++",allPc);
   const { Meta } = Card;
   return (
     <>
@@ -32,7 +33,7 @@ const AllPc = ({ allPc }) => {
       >
         {allPc?.map((pc) => (
           <Col key={pc.id} className="gutter-row" span={6}>
-            <Card
+            <Card style={{marginBottom:"10px"}}
               hoverable
               cover={
                 <Image
