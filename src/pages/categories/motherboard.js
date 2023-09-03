@@ -2,7 +2,7 @@ import RootLayout from '@/components/Layouts/RootLayout';
 import React from 'react';
 
 import AllPc from '@/components/UI/AllPc';
-import { Button, Card, Col, Image, Row } from "antd";
+import { Breadcrumb, Button, Card, Col, Image, Row } from "antd";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -18,9 +18,18 @@ const motherboard = ({allPc}) => {
     const motherboardPc = allPc.filter((pc) => pc.category === 'motherboard');
     return (
       <>
-        <div>
-            <h1>This is motherboard page</h1>
-        </div>
+        <Head>
+        <title>Motherboard Page</title>
+      </Head>
+      <Breadcrumb
+        style={{
+          margin: "16px 0",
+        }}
+      >
+        <Breadcrumb.Item href='/'>/ Home</Breadcrumb.Item>
+      <Breadcrumb.Item href='/categories'>Categories</Breadcrumb.Item>
+        <Breadcrumb.Item>Motherboard</Breadcrumb.Item>
+      </Breadcrumb>
         <Row
         gutter={{
           xs: 8,

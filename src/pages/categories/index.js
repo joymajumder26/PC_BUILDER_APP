@@ -1,5 +1,5 @@
 import RootLayout from "@/components/Layouts/RootLayout";
-import { Button, Space } from "antd";
+import { Breadcrumb, Button, Space } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
@@ -10,9 +10,16 @@ const CategoriesPage = () => {
       <Head>
         <title>Categories Page</title>
       </Head>
-      <div>
-        <h1>This is categories page</h1>
-      </div>
+      <Breadcrumb
+      style={{
+        margin: '16px 0',
+      }}
+    >
+      <Breadcrumb.Item href="/">/ Home</Breadcrumb.Item>
+      <Breadcrumb.Item>Categories</Breadcrumb.Item>
+      {/* <Breadcrumb.Item>CPU</Breadcrumb.Item> */}
+      
+    </Breadcrumb>
       <Space className="site-button-ghost-wrapper" wrap>
         <Link href="/categories/cpu">
           <Button type="primary" ghost>

@@ -1,8 +1,8 @@
-import RootLayout from '@/components/Layouts/RootLayout';
-import React from 'react';
+import RootLayout from "@/components/Layouts/RootLayout";
+import React from "react";
 
-import AllPc from '@/components/UI/AllPc';
-import { Button, Card, Col, Image, Row } from "antd";
+import AllPc from "@/components/UI/AllPc";
+import { Breadcrumb, Button, Card, Col, Image, Row } from "antd";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -13,15 +13,24 @@ import {
   StarFilled,
 } from "@ant-design/icons";
 
-const monitor = ({allPc}) => {
-    const { Meta } = Card;
-    const monitorPc = allPc.filter((pc) => pc.category === 'monitor');
-    return (
-      <>
-        <div>
-            <h1>This is cpu page</h1>
-        </div>
-        <Row
+const monitor = ({ allPc }) => {
+  const { Meta } = Card;
+  const monitorPc = allPc.filter((pc) => pc.category === "monitor");
+  return (
+    <>
+     <Head>
+        <title>Monitor Page</title>
+      </Head>
+      <Breadcrumb
+        style={{
+          margin: "16px 0",
+        }}
+      >
+         <Breadcrumb.Item href='/'>/ Home</Breadcrumb.Item>
+      <Breadcrumb.Item href='/categories'>Categories</Breadcrumb.Item>
+        <Breadcrumb.Item>Monitor</Breadcrumb.Item>
+      </Breadcrumb>
+      <Row
         gutter={{
           xs: 8,
           sm: 16,
@@ -118,23 +127,24 @@ const monitor = ({allPc}) => {
             </Card>
           </Col>
         ))}
-      </Row></>
-    );
+      </Row>
+    </>
+  );
 };
 
 export default monitor;
 
 monitor.getLayout = function getLayout(page) {
-    return <RootLayout>{page}</RootLayout>;
+  return <RootLayout>{page}</RootLayout>;
+};
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:3000/api/pc");
+  const data = await res.json();
+  // console.log(data);
+  return {
+    props: {
+      allPc: data.data,
+    },
+    revalidate: 10, //auto build hobe 5 sec porei
   };
-  export const getStaticProps = async () => {
-    const res = await fetch("http://localhost:3000/api/pc");
-    const data = await res.json();
-    // console.log(data);
-    return {
-      props: {
-        allPc: data.data,
-      },
-      revalidate: 10, //auto build hobe 5 sec porei
-    };
-  };
+};

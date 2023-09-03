@@ -2,7 +2,7 @@ import RootLayout from '@/components/Layouts/RootLayout';
 import React from 'react';
 
 import AllPc from '@/components/UI/AllPc';
-import { Button, Card, Col, Image, Row } from "antd";
+import { Breadcrumb, Button, Card, Col, Image, Row } from "antd";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -18,9 +18,18 @@ const storage = ({allPc}) => {
     const storagePc = allPc.filter((pc) => pc.category === 'storage');
     return (
       <>
-        <div>
-            <h1>This is storage page</h1>
-        </div>
+         <Head>
+        <title>Storage Page</title>
+      </Head>
+      <Breadcrumb
+        style={{
+          margin: "16px 0",
+        }}
+      >
+        <Breadcrumb.Item href='/'>/ Home</Breadcrumb.Item>
+      <Breadcrumb.Item href='/categories'>Categories</Breadcrumb.Item>
+        <Breadcrumb.Item>Storage</Breadcrumb.Item>
+      </Breadcrumb>
         <Row
         gutter={{
           xs: 8,

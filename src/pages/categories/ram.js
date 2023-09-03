@@ -2,7 +2,7 @@ import RootLayout from '@/components/Layouts/RootLayout';
 import React from 'react';
 
 import AllPc from '@/components/UI/AllPc';
-import { Button, Card, Col, Image, Row } from "antd";
+import { Breadcrumb, Button, Card, Col, Image, Row } from "antd";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -18,9 +18,18 @@ const ram = ({allPc}) => {
     const ramPc = allPc.filter((pc) => pc.category === 'ram');
     return (
       <>
-        <div>
-            <h1>This is ram page</h1>
-        </div>
+        <Head>
+        <title>Ram Page</title>
+      </Head>
+      <Breadcrumb
+        style={{
+          margin: "16px 0",
+        }}
+      >
+        <Breadcrumb.Item href='/'>/ Home</Breadcrumb.Item>
+      <Breadcrumb.Item href='/categories'>Categories</Breadcrumb.Item>
+        <Breadcrumb.Item>Ram</Breadcrumb.Item>
+      </Breadcrumb>
         <Row
         gutter={{
           xs: 8,
