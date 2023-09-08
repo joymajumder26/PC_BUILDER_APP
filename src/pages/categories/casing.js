@@ -1,7 +1,9 @@
-import RootLayout from "@/components/Layouts/RootLayout";
-import React, { useContext } from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+import RootLayout from '@/components/Layouts/RootLayout';
+// import React, { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react'
 
-import AllPc from "@/components/UI/AllPc";
+import AllPc from '@/components/UI/AllPc';
 import { Breadcrumb, Button, Card, Col, Image, Row } from "antd";
 
 import Head from "next/head";
@@ -12,29 +14,33 @@ import {
   ProfileOutlined,
   StarFilled,
 } from "@ant-design/icons";
-import { CartContext } from "@/context/cart";
-import { useRouter } from "next/router";
+import { CartContext } from '@/context/cart';
+import {useRouter} from "next/router";
 
-const monitor = ({ allPc }) => {
-  const { Meta } = Card;
+
+const casing = ({allPc}) => {
   const router = useRouter();
-  const { cartItems, addToCart } = useContext(CartContext)
-  const monitorPc = allPc.filter((pc) => pc.category === "monitor");
-  return (
-    <>
-     <Head>
-        <title>Monitor Page</title>
+    const { Meta } = Card;
+    const { cartItems, addToCart } = useContext(CartContext)
+    console.log('cartItems',cartItems[0]?.item.category==="casing");
+    const casingPc = allPc.filter((pc) => pc.category === 'casing');
+    return (
+      <>
+       <Head>
+        <title>casing page</title>
       </Head>
-      <Breadcrumb
-        style={{
-          margin: "16px 0",
-        }}
-      >
-         <Breadcrumb.Item href='/'>/ Home</Breadcrumb.Item>
+       <Breadcrumb
+      style={{
+        margin: '16px 0',
+      }}
+    >
+      <Breadcrumb.Item href='/'>/ Home</Breadcrumb.Item>
       <Breadcrumb.Item href='/categories'>Categories</Breadcrumb.Item>
-        <Breadcrumb.Item>Monitor</Breadcrumb.Item>
-      </Breadcrumb>
-      <Row
+      <Breadcrumb.Item>Casing</Breadcrumb.Item>
+      
+    </Breadcrumb>
+        
+        <Row
         gutter={{
           xs: 8,
           sm: 16,
@@ -42,16 +48,17 @@ const monitor = ({ allPc }) => {
           lg: 32,
         }}
       >
-        {monitorPc?.map((pc) => (
+        {casingPc?.map((pc) => (
           <Col key={pc.id} className="gutter-row" span={6}>
             <Card
               hoverable
               cover={
-                <Image
+                <Image 
                   src={pc?.image_url}
                   width={280}
                   height={200}
                   responsive
+                  
                   alt="news image"
                 />
               }
@@ -135,24 +142,23 @@ const monitor = ({ allPc }) => {
             </Card>
           </Col>
         ))}
-      </Row>
-    </>
-  );
+      </Row></>
+    );
 };
 
-export default monitor;
+export default casing;
 
-monitor.getLayout = function getLayout(page) {
-  return <RootLayout>{page}</RootLayout>;
-};
-export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:3000/api/pc");
-  const data = await res.json();
-  // console.log(data);
-  return {
-    props: {
-      allPc: data.data,
-    },
-    revalidate: 10, //auto build hobe 5 sec porei
+casing.getLayout = function getLayout(page) {
+    return <RootLayout>{page}</RootLayout>;
   };
-};
+  export const getStaticProps = async () => {
+    const res = await fetch("http://localhost:3000/api/pc");
+    const data = await res.json();
+    // console.log(data);
+    return {
+      props: {
+        allPc: data.data,
+      },
+      revalidate: 10, //auto build hobe 5 sec porei
+    };
+  };

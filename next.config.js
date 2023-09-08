@@ -3,4 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = nextConfig
+// next.config.js
+module.exports = nextConfig;
+
+module.exports = {
+  images: {
+    domains: ['encrypted-tbn0.gstatic.com',], // Add 'encrypted-tbn0.gstatic.com' to the domains array
+  },
+};

@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import RootLayout from '@/components/Layouts/RootLayout';
-import React from 'react';
+// import React, { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react'
 
 import AllPc from '@/components/UI/AllPc';
 import { Breadcrumb, Button, Card, Col, Image, Row } from "antd";
@@ -12,9 +14,15 @@ import {
   ProfileOutlined,
   StarFilled,
 } from "@ant-design/icons";
+import { CartContext } from '@/context/cart';
+import {useRouter} from "next/router";
+
 
 const cpu = ({allPc}) => {
+  const router = useRouter();
     const { Meta } = Card;
+    const { cartItems, addToCart } = useContext(CartContext)
+    console.log('cartItems',cartItems[0]?.item.category==="cpu");
     const cpuPc = allPc.filter((pc) => pc.category === 'cpu');
     return (
       <>
@@ -45,11 +53,12 @@ const cpu = ({allPc}) => {
             <Card
               hoverable
               cover={
-                <Image
+                <Image 
                   src={pc?.image_url}
-                  width={100}
-                  height={100}
+                  width={280}
+                  height={200}
                   responsive
+                  
                   alt="news image"
                 />
               }
@@ -107,7 +116,7 @@ const cpu = ({allPc}) => {
                 </span>
               </p>
 
-              <Link href={`/pc/${pc?.id}`}>
+              {/* <Link href={`/pc/${pc?.id}`}> */}
                 <Button
                   style={{
                     fontSize: "15px",
@@ -120,12 +129,16 @@ const cpu = ({allPc}) => {
                     letterSpacing: "3px",
                     textAlign: "center",
                   }}
+                  onClick={() => {
+                    addToCart(pc);
+                    router.push('/pcBuilder'); // Redirect to the builder page
+                  }}
                 >
                   <p>
                     Add to Builder <ArrowRightOutlined />
                   </p>
                 </Button>
-              </Link>
+              {/* </Link> */}
             </Card>
           </Col>
         ))}
