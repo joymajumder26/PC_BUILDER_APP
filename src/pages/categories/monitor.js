@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import RootLayout from "@/components/Layouts/RootLayout";
-import React, { useContext } from "react";
+// import React, { useContext } from 'react';
+import { useContext, useEffect, useState } from "react";
 
 import AllPc from "@/components/UI/AllPc";
 import { Breadcrumb, Button, Card, Col, Image, Row, message } from "antd";
@@ -16,15 +18,15 @@ import { CartContext } from "@/context/cart";
 import { useRouter } from "next/router";
 
 const monitor = ({ allPc }) => {
-  const { Meta } = Card;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
+  const { Meta } = Card;
   const { cartItems, addToCart } = useContext(CartContext);
+  // console.log('cartItems',cartItems[0]?.item.category==="monitor");
   const monitorPc = allPc.filter((pc) => pc.category === "monitor");
   return (
     <>
       <Head>
-        <title>Monitor Page</title>
+        <title>monitor page</title>
       </Head>
       <Breadcrumb
         style={{
@@ -39,6 +41,7 @@ const monitor = ({ allPc }) => {
         </Breadcrumb.Item>
         <Breadcrumb.Item>monitor</Breadcrumb.Item>
       </Breadcrumb>
+
       <Row
         gutter={{
           xs: 8,
@@ -57,7 +60,7 @@ const monitor = ({ allPc }) => {
                   width={280}
                   height={200}
                   responsive
-                  alt="news image"
+                  alt="monitor image"
                 />
               }
             >
@@ -131,7 +134,7 @@ const monitor = ({ allPc }) => {
                   addToCart(pc);
                   router.push("/pcBuilder");
                   message.success(
-                    "Monitor Added Successfully!.In Next Please select Casing for buil pc"
+                    "Monitor Added Successfully!.In Next Please select Motherboard for buil pc"
                   ); // Redirect to the builder page
                 }}
               >

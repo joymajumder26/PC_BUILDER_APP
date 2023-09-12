@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import styles from "@/styles/Create.module.css";
 import RootLayout from "@/components/Layouts/RootLayout";
 import { Breadcrumb } from "antd";
-import { useHistory } from "react-router-dom";
+
 import { useRouter } from "next/router";
 
 const CreatePc = () => {

@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import RootLayout from "@/components/Layouts/RootLayout";
-import React, { useContext } from "react";
+// import React, { useContext } from 'react';
+import { useContext, useEffect, useState } from "react";
 
 import AllPc from "@/components/UI/AllPc";
 import { Breadcrumb, Button, Card, Col, Image, Row, message } from "antd";
@@ -15,16 +17,16 @@ import {
 import { CartContext } from "@/context/cart";
 import { useRouter } from "next/router";
 
-const storage = ({ allPc }) => {
+const monitor = ({ allPc }) => {
+  const router = useRouter();
   const { Meta } = Card;
   const { cartItems, addToCart } = useContext(CartContext);
-  const router = useRouter();
-  console.log("cartItems", cartItems);
-  const storagePc = allPc.filter((pc) => pc.category === "storage");
+  // console.log('cartItems',cartItems[0]?.item.category==="monitor");
+  const monitorPc = allPc.filter((pc) => pc.category === "monitor");
   return (
     <>
       <Head>
-        <title>Storage Page</title>
+        <title>monitor page</title>
       </Head>
       <Breadcrumb
         style={{
@@ -37,8 +39,9 @@ const storage = ({ allPc }) => {
         <Breadcrumb.Item>
           <Link href="/pcBuilder">Categories</Link>
         </Breadcrumb.Item>
-        <Breadcrumb.Item>DeviceStorage</Breadcrumb.Item>
+        <Breadcrumb.Item>monitor</Breadcrumb.Item>
       </Breadcrumb>
+
       <Row
         gutter={{
           xs: 8,
@@ -47,7 +50,7 @@ const storage = ({ allPc }) => {
           lg: 32,
         }}
       >
-        {storagePc?.map((pc) => (
+        {monitorPc?.map((pc) => (
           <Col key={pc.id} className="gutter-row" span={6}>
             <Card
               hoverable
@@ -57,7 +60,7 @@ const storage = ({ allPc }) => {
                   width={280}
                   height={200}
                   responsive
-                  alt="news image"
+                  alt="monitor image"
                 />
               }
             >
@@ -131,7 +134,7 @@ const storage = ({ allPc }) => {
                   addToCart(pc);
                   router.push("/pcBuilder");
                   message.success(
-                    "Device Storage Added Successfully!.In Next Please select Monitor for buil pc"
+                    "storage Added Successfully!.In Next Please select Monitor for buil pc"
                   ); // Redirect to the builder page
                 }}
               >
@@ -148,9 +151,9 @@ const storage = ({ allPc }) => {
   );
 };
 
-export default storage;
+export default monitor;
 
-storage.getLayout = function getLayout(page) {
+monitor.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 export const getStaticProps = async () => {

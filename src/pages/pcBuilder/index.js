@@ -1,5 +1,5 @@
 import RootLayout from "@/components/Layouts/RootLayout";
-import AllPc from "@/components/UI/AllPc";
+
 import {
   Breadcrumb,
   Button,
@@ -15,12 +15,8 @@ import Head from "next/head";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
 
-import {
-  ArrowRightOutlined,
-  ProfileOutlined,
-  StarFilled,
-} from "@ant-design/icons";
-import CategoriesPage from "../categories";
+
+
 import { CartContext } from "@/context/cart";
 import CartSidebar from "./cartSilder";
 

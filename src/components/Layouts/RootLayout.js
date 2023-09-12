@@ -1,20 +1,15 @@
 import {
   ProfileOutlined,
-  MobileOutlined,
+ 
   UserOutlined,
-  FacebookFilled,
-  LinkedinFilled,
-  GoogleSquareFilled,
-  TwitterSquareFilled,
-  MenuOutlined,
+  
   DownOutlined
 } from "@ant-design/icons";
 import { Breadcrumb, Button, Dropdown, Layout, Menu } from "antd";
 const { Header, Content, Footer } = Layout;
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
-import { useEffect, useState } from "react";
+
 // import styles from "@/styles/responsive.css";
 
 const RootLayout = ({ children }) => {

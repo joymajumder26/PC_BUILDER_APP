@@ -6,10 +6,7 @@ import { Breadcrumb } from "antd";
 
 
 const HomePage = ({allPc}) => {
-  // const DynamicBanner = dynamic(() => import("@/components/UI/Banner"), {
-  //   loading: () => <h1>Loading...</h1>,
-  //   ssr:false,
-  // })
+
   return (
     <>
       <Head>

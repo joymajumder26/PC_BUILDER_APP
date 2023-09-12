@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import RootLayout from "@/components/Layouts/RootLayout";
-import React, { useContext } from "react";
+// import React, { useContext } from 'react';
+import { useContext, useEffect, useState } from "react";
 
 import AllPc from "@/components/UI/AllPc";
 import { Breadcrumb, Button, Card, Col, Image, Row, message } from "antd";
@@ -16,15 +18,15 @@ import { CartContext } from "@/context/cart";
 import { useRouter } from "next/router";
 
 const motherboard = ({ allPc }) => {
+  const router = useRouter();
   const { Meta } = Card;
   const { cartItems, addToCart } = useContext(CartContext);
-  const router = useRouter();
-  console.log("cartItems", cartItems);
+  // console.log('cartItems',cartItems[0]?.item.category==="motherboard");
   const motherboardPc = allPc.filter((pc) => pc.category === "motherboard");
   return (
     <>
       <Head>
-        <title>Motherboard Page</title>
+        <title>motherboard page</title>
       </Head>
       <Breadcrumb
         style={{
@@ -37,8 +39,9 @@ const motherboard = ({ allPc }) => {
         <Breadcrumb.Item>
           <Link href="/pcBuilder">Categories</Link>
         </Breadcrumb.Item>
-        <Breadcrumb.Item>MotherBoard</Breadcrumb.Item>
+        <Breadcrumb.Item>motherboard</Breadcrumb.Item>
       </Breadcrumb>
+
       <Row
         gutter={{
           xs: 8,
@@ -57,7 +60,7 @@ const motherboard = ({ allPc }) => {
                   width={280}
                   height={200}
                   responsive
-                  alt="news image"
+                  alt="motherboard image"
                 />
               }
             >
@@ -131,7 +134,7 @@ const motherboard = ({ allPc }) => {
                   addToCart(pc);
                   router.push("/pcBuilder");
                   message.success(
-                    "MotherBoard Added Successfully!.In Next Please select ram for buil pc"
+                    "Motherboard Added Successfully!.In Next Please select ram for buil pc"
                   ); // Redirect to the builder page
                 }}
               >
