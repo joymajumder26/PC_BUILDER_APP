@@ -1,8 +1,8 @@
-import RootLayout from '@/components/Layouts/RootLayout';
-import React, { useContext } from 'react';
+import RootLayout from "@/components/Layouts/RootLayout";
+import React, { useContext } from "react";
 
-import AllPc from '@/components/UI/AllPc';
-import { Breadcrumb, Button, Card, Col, Image, Row } from "antd";
+import AllPc from "@/components/UI/AllPc";
+import { Breadcrumb, Button, Card, Col, Image, Row, message } from "antd";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -12,18 +12,18 @@ import {
   ProfileOutlined,
   StarFilled,
 } from "@ant-design/icons";
-import { CartContext } from '@/context/cart';
-import { useRouter } from 'next/router';
+import { CartContext } from "@/context/cart";
+import { useRouter } from "next/router";
 
-const storage = ({allPc}) => {
-    const { Meta } = Card;
-    const { cartItems, addToCart } = useContext(CartContext);
-    const router = useRouter();
-    console.log('cartItems',cartItems);
-    const storagePc = allPc.filter((pc) => pc.category === 'storage');
-    return (
-      <>
-         <Head>
+const storage = ({ allPc }) => {
+  const { Meta } = Card;
+  const { cartItems, addToCart } = useContext(CartContext);
+  const router = useRouter();
+  console.log("cartItems", cartItems);
+  const storagePc = allPc.filter((pc) => pc.category === "storage");
+  return (
+    <>
+      <Head>
         <title>Storage Page</title>
       </Head>
       <Breadcrumb
@@ -31,11 +31,15 @@ const storage = ({allPc}) => {
           margin: "16px 0",
         }}
       >
-        <Breadcrumb.Item href='/'>/ Home</Breadcrumb.Item>
-      <Breadcrumb.Item href='/categories'>Categories</Breadcrumb.Item>
-        <Breadcrumb.Item>Storage</Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link href="/">Home</Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link href="/pcBuilder">Categories</Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>DeviceStorage</Breadcrumb.Item>
       </Breadcrumb>
-        <Row
+      <Row
         gutter={{
           xs: 8,
           sm: 16,
@@ -111,48 +115,52 @@ const storage = ({allPc}) => {
               </p>
 
               {/* <Link href={`/pc/${pc?.id}`}> */}
-                <Button
-                  style={{
-                    fontSize: "15px",
-                    marginTop: "20px",
-                    backgroundColor: "black",
-                    color: "white",
-                    width: "100%",
-                    padding: "2px 5px ",
-                    fontWeight: "300",
-                    letterSpacing: "3px",
-                    textAlign: "center",
-                  }}
-                  onClick={() => {
-                    addToCart(pc);
-                    router.push('/pcBuilder'); // Redirect to the builder page
-                  }}
-                >
-                  <p>
-                    Add to Builder <ArrowRightOutlined />
-                  </p>
-                </Button>
+              <Button
+                style={{
+                  fontSize: "15px",
+                  marginTop: "20px",
+                  backgroundColor: "black",
+                  color: "white",
+                  width: "100%",
+                  padding: "2px 5px ",
+                  fontWeight: "300",
+                  letterSpacing: "3px",
+                  textAlign: "center",
+                }}
+                onClick={() => {
+                  addToCart(pc);
+                  router.push("/pcBuilder");
+                  message.success(
+                    "Device Storage Added Successfully!.In Next Please select Monitor for buil pc"
+                  ); // Redirect to the builder page
+                }}
+              >
+                <p>
+                  Add to Builder <ArrowRightOutlined />
+                </p>
+              </Button>
               {/* </Link> */}
             </Card>
           </Col>
         ))}
-      </Row></>
-    );
+      </Row>
+    </>
+  );
 };
 
 export default storage;
 
 storage.getLayout = function getLayout(page) {
-    return <RootLayout>{page}</RootLayout>;
+  return <RootLayout>{page}</RootLayout>;
+};
+export const getStaticProps = async () => {
+  const res = await fetch("http://localhost:3000/api/pc");
+  const data = await res.json();
+  // console.log(data);
+  return {
+    props: {
+      allPc: data.data,
+    },
+    revalidate: 10, //auto build hobe 5 sec porei
   };
-  export const getStaticProps = async () => {
-    const res = await fetch("http://localhost:3000/api/pc");
-    const data = await res.json();
-    // console.log(data);
-    return {
-      props: {
-        allPc: data.data,
-      },
-      revalidate: 10, //auto build hobe 5 sec porei
-    };
-  };
+};

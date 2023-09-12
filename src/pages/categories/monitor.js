@@ -2,7 +2,7 @@ import RootLayout from "@/components/Layouts/RootLayout";
 import React, { useContext } from "react";
 
 import AllPc from "@/components/UI/AllPc";
-import { Breadcrumb, Button, Card, Col, Image, Row } from "antd";
+import { Breadcrumb, Button, Card, Col, Image, Row, message } from "antd";
 
 import Head from "next/head";
 import Link from "next/link";
@@ -17,12 +17,13 @@ import { useRouter } from "next/router";
 
 const monitor = ({ allPc }) => {
   const { Meta } = Card;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
-  const { cartItems, addToCart } = useContext(CartContext)
+  const { cartItems, addToCart } = useContext(CartContext);
   const monitorPc = allPc.filter((pc) => pc.category === "monitor");
   return (
     <>
-     <Head>
+      <Head>
         <title>Monitor Page</title>
       </Head>
       <Breadcrumb
@@ -30,9 +31,13 @@ const monitor = ({ allPc }) => {
           margin: "16px 0",
         }}
       >
-         <Breadcrumb.Item href='/'>/ Home</Breadcrumb.Item>
-      <Breadcrumb.Item href='/categories'>Categories</Breadcrumb.Item>
-        <Breadcrumb.Item>Monitor</Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link href="/">Home</Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link href="/pcBuilder">Categories</Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>monitor</Breadcrumb.Item>
       </Breadcrumb>
       <Row
         gutter={{
@@ -110,27 +115,30 @@ const monitor = ({ allPc }) => {
               </p>
 
               {/* <Link href={`/pc/${pc?.id}`}> */}
-                <Button
-                  style={{
-                    fontSize: "15px",
-                    marginTop: "20px",
-                    backgroundColor: "black",
-                    color: "white",
-                    width: "100%",
-                    padding: "2px 5px ",
-                    fontWeight: "300",
-                    letterSpacing: "3px",
-                    textAlign: "center",
-                  }}
-                  onClick={() => {
-                    addToCart(pc);
-                    router.push('/pcBuilder'); // Redirect to the builder page
-                  }}
-                >
-                  <p>
-                    Add to Builder <ArrowRightOutlined />
-                  </p>
-                </Button>
+              <Button
+                style={{
+                  fontSize: "15px",
+                  marginTop: "20px",
+                  backgroundColor: "black",
+                  color: "white",
+                  width: "100%",
+                  padding: "2px 5px ",
+                  fontWeight: "300",
+                  letterSpacing: "3px",
+                  textAlign: "center",
+                }}
+                onClick={() => {
+                  addToCart(pc);
+                  router.push("/pcBuilder");
+                  message.success(
+                    "Monitor Added Successfully!.In Next Please select Casing for buil pc"
+                  ); // Redirect to the builder page
+                }}
+              >
+                <p>
+                  Add to Builder <ArrowRightOutlined />
+                </p>
+              </Button>
               {/* </Link> */}
             </Card>
           </Col>

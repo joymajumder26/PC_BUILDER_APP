@@ -8,7 +8,7 @@ export const CartProvider = ({ children }) => {
 ]) 
 
   const addToCart = (item) => {
-    setCartItems([...cartItems, {  item }]);
+    setCartItems([...cartItems, {  ...item,isSelected:true }]);
   };
 
   const removeFromCart = (item) => {

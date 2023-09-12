@@ -8,6 +8,6 @@ module.exports = nextConfig;
 
 module.exports = {
   images: {
-    domains: ['encrypted-tbn0.gstatic.com',], // Add 'encrypted-tbn0.gstatic.com' to the domains array
+    domains: ['encrypted-tbn0.gstatic.com'], // Add 'encrypted-tbn0.gstatic.com' to the domains array
   },
 };

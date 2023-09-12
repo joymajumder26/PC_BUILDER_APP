@@ -2,6 +2,10 @@
 .brand-logo {
     text-align: center;
   }
+  .responsive_image{
+    max-width: 100%;
+    height: auto;
+  }
   
   /* Media query for larger screens */
   @media (min-width: 768px) {

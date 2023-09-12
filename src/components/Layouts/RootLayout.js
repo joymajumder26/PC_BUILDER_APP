@@ -42,7 +42,7 @@ const RootLayout = ({ children }) => {
         <Link href="/categories/monitor">Monitor</Link>
       </Menu.Item>
       <Menu.Item key="7">
-        <Link href="/categories/others">Casing</Link>
+        <Link href="/categories/casing">Casing</Link>
       </Menu.Item>
       {/* Add more categories as needed */}
     </Menu>

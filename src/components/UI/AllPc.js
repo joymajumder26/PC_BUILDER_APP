@@ -5,9 +5,10 @@ import {
   CalendarOutlined,
   CommentOutlined,
   ProfileOutlined,
-  StarFilled
+  StarFilled,
 } from "@ant-design/icons";
 import Link from "next/link";
+import styles from "@/styles/Home.module.css";
 
 const AllPc = ({ allPc }) => {
   // console.log("__________________++++++++++++++++++++++",allPc);
@@ -32,19 +33,15 @@ const AllPc = ({ allPc }) => {
         }}
       >
         {allPc?.map((pc) => (
-          <Col key={pc.id} className="gutter-row" span={6}>
-            <Card style={{marginBottom:"10px"}}
-              hoverable
-              cover={
-                <Image
-                  src={pc?.image_url}
-                  width={500}
-                  height={200}
-                  responsive
-                  alt="news image"
-                />
-              }
-            >
+          <Col key={pc.id} className="gutter-row" xs={24} sm={12} md={8} lg={6}>
+            <Card style={{ marginBottom: "10px" }} hoverable>
+              <Image className={styles.responsive_image}
+                src={pc?.image_url}
+                width={300}
+                height={200}
+                responsive
+                alt="news image"
+              />
               <Meta title={pc?.title} />
               <div
                 className="line"
@@ -55,27 +52,29 @@ const AllPc = ({ allPc }) => {
                   width: "100%",
                 }}
               ></div>
-              {/* <h1>category={pc?.category}</h1> */}
-              <p style={{
+              <p
+                style={{
                   display: "flex",
                   width: "100%",
                   color: "gray",
                   margin: "10px 0px",
                   fontSize: "12px",
-                  
-                  
-                }}>Category: <Meta style={{paddingLeft:"7px"}} title={pc?.category} /></p>
-              <p style={{
+                }}
+              >
+                Category:{" "}
+                <Meta style={{ paddingLeft: "7px" }} title={pc?.category} />
+              </p>
+              <p
+                style={{
                   display: "flex",
                   width: "100%",
                   color: "gray",
                   margin: "10px 0px",
                   fontSize: "12px",
-                  
-                  
-                }}>Price: <Meta style={{paddingLeft:"7px"}} title={pc?.price} /></p>
-              
-
+                }}
+              >
+                Price: <Meta style={{ paddingLeft: "7px" }} title={pc?.price} />
+              </p>
               <p
                 style={{
                   display: "flex",
@@ -86,17 +85,13 @@ const AllPc = ({ allPc }) => {
                   fontSize: "12px",
                 }}
               >
-              
-                
                 <span>
                   <ProfileOutlined /> {pc?.status}
                 </span>
                 <span>
-                <StarFilled /> {pc?.rating}
+                  <StarFilled /> {pc?.rating}
                 </span>
               </p>
-
-              
               <Link href={`/pc/${pc?.id}`}>
                 <Button
                   style={{
